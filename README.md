@@ -1,6 +1,6 @@
 # SQL2Stream
 
-Bachelor thesis at University of Economics in Prague led by Ing. Rudolf Pecinovský, CSc. Thesis has been succesfully defended in 2015. Full text in Czech can be found as pdf file in repository.
+Bachelor thesis at University of Economics in Prague led by Ing. Rudolf Pecinovský, CSc (Opponent: Ing. Vladimír Oraný). Thesis has been succesfully defended in 2015. Full text in Czech can be found as pdf file in repository.
 
 ### Title
 Data processing library using SQL queries
