@@ -10,7 +10,7 @@ Eighth version of programming language Java brought broad variety of changes, wh
 SQL, Streams, Java 8, declarative programming, interpret
 
 ## Tutorial and examples of usage
-For my library I decided to take advantage of tree structure when dealing with tuples. I have defined several classes and interfaces for that and used composite design pattern. This library supports joins, reststrion, conditions and ordering.
+For my library I decided to take advantage of tree structure when dealing with tuples. I have defined several classes and interfaces for that and used composite design pattern. This library supports joins, reststrictions and ordering.
 
 #### Input
 SQL querry as input into library is supplies in String form. Iterables are provided in `InputContainer<T>`, constructor has two arguments, `Class<T>` and `Iterable<T>`. User can give up to four containers as input.
