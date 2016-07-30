@@ -1,4 +1,4 @@
-package edu.jsykora.sql2stream;
+package edu.jsykora.sql2stream.integration;
 
 import static org.junit.Assert.fail;
 
@@ -8,9 +8,14 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.jsykora.sql2stream.InputContainer;
+import edu.jsykora.sql2stream.SQL2Stream;
+import edu.jsykora.sql2stream.SQL2StreamException;
 import edu.jsykora.sql2stream.element.BaseElement;
+import edu.jsykora.sql2stream.iterator.ResultIterator;
+import edu.jsykora.sql2stream.models.TestingModel;
 
-public class FullTest {
+public class FullIntegrationTest {
     private List<TestingModel> list1;
     private List<TestingModel> list2;
     private List<TestingModel> list3;

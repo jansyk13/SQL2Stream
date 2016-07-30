@@ -1,10 +1,8 @@
 package edu.jsykora.sql2stream;
 
-import com.foundationdb.sql.StandardException;
-
 // TODO: Auto-generated Javadoc
 
-public final class SQL2StreamException extends StandardException {
+public final class SQL2StreamException extends RuntimeException {
 
     private static final long serialVersionUID = 1117459919302661139L;
 

@@ -1,4 +1,4 @@
-package edu.jsykora.sql2stream;
+package edu.jsykora.sql2stream.utils;
 
 import java.util.Comparator;
 
@@ -11,7 +11,7 @@ import edu.jsykora.sql2stream.expression.Expression;
 
 // TODO: Auto-generated Javadoc
 
-class DynamicComparator<T, O extends Comparable<O>> implements Comparator<BaseElement<T>> {
+public class DynamicComparator<T, O extends Comparable<O>> implements Comparator<BaseElement<T>> {
 
     private OrderByColumn orderBy;
 
@@ -42,7 +42,7 @@ class DynamicComparator<T, O extends Comparable<O>> implements Comparator<BaseEl
     }
 
     @SuppressWarnings("unchecked")
-    protected static <T, O extends Comparable<O>> Comparator<T> getComparator(OrderByList orderByList) {
+    public static <T, O extends Comparable<O>> Comparator<T> getComparator(OrderByList orderByList) {
         if (orderByList == null || orderByList.isEmpty() || orderByList.get(0) == null) {
             return (o1, o2) -> 0;
         }
@@ -62,15 +62,12 @@ class DynamicComparator<T, O extends Comparable<O>> implements Comparator<BaseEl
                 return result * (-1);
             }
             return result;
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             return 0;
         }
-
     }
 
     private enum Ordering {
-
         ASC, DESC
     }
-
 }

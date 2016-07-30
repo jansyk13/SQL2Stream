@@ -1,4 +1,4 @@
-package edu.jsykora.sql2stream;
+package edu.jsykora.sql2stream.iterator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ public final class MappedResultIterator<T> implements ResultIterator<T> {
         this.mappingFunction = mappingFunction;
     }
 
-    protected MappedResultIterator(Function<List<Object>, T> mappingFunction, List<BaseElement<?>> result) {
+    public MappedResultIterator(Function<List<Object>, T> mappingFunction, List<BaseElement<?>> result) {
         this(mappingFunction);
         this.result = result;
         this.size = result.size();

@@ -1,4 +1,4 @@
-package edu.jsykora.sql2stream;
+package edu.jsykora.sql2stream.iterator;
 
 import java.util.List;
 
@@ -10,9 +10,9 @@ public final class BaseResultIterator<T> implements ResultIterator<BaseElement<T
 
     private List<BaseElement<T>> result;
 
-    private Integer size;
+    private int size;
 
-    protected BaseResultIterator(List<BaseElement<T>> result) {
+    public BaseResultIterator(List<BaseElement<T>> result) {
         this.result = result;
         this.size = result.size();
     }
@@ -28,7 +28,7 @@ public final class BaseResultIterator<T> implements ResultIterator<BaseElement<T
         return local;
     }
 
-    public Integer getLeft() {
+    public int getLeft() {
         return this.size;
     }
 

@@ -1,11 +1,10 @@
-package edu.jsykora.sql2stream;
+package edu.jsykora.sql2stream.models;
 
 public class TestingModel {
     private String name;
     private int number;
 
     public TestingModel() {
-
     }
 
     public TestingModel(String name, int number) {

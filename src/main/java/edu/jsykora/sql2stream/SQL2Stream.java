@@ -17,8 +17,15 @@ import edu.jsykora.sql2stream.element.BaseElement;
 import edu.jsykora.sql2stream.element.CompositeSourceElement;
 import edu.jsykora.sql2stream.element.SourceElement;
 import edu.jsykora.sql2stream.element.TerminalSourceElement;
+import edu.jsykora.sql2stream.iterator.BaseResultIterator;
+import edu.jsykora.sql2stream.iterator.MappedResultIterator;
+import edu.jsykora.sql2stream.iterator.ResultIterator;
 import edu.jsykora.sql2stream.join.AbstractJoin;
 import edu.jsykora.sql2stream.predicate.BasePredicate;
+import edu.jsykora.sql2stream.sql.DynamicVisitor;
+import edu.jsykora.sql2stream.sql.SQLParser;
+import edu.jsykora.sql2stream.utils.DynamicComparator;
+import edu.jsykora.sql2stream.utils.SelectFunction;
 
 // TODO: Auto-generated Javadoc
 
@@ -41,6 +48,8 @@ public final class SQL2Stream<T> {
     private ValueNode whereClause;
 
     private SQL2Stream(String sql) {
+
+
         if (sql != null && !sql.isEmpty()) {
             this.parser = new SQLParser(sql);
             this.visitor = new DynamicVisitor();
@@ -74,12 +83,8 @@ public final class SQL2Stream<T> {
     }
 
     protected void parse() {
-        try {
-            this.sqlTree = (CursorNode) parser.parseSQL(visitor);
-            // sqlTree.treePrint();
-        } catch (SQL2StreamException e) {
-            e.printStackTrace();
-        }
+        this.sqlTree = (CursorNode) parser.parseSQL(visitor);
+
         SelectNode selectNode = (SelectNode) sqlTree.getResultSetNode();
         this.fromList = selectNode.getFromList();
         this.resultList = selectNode.getResultColumns();
@@ -88,7 +93,7 @@ public final class SQL2Stream<T> {
     }
 
     @SuppressWarnings({"unchecked", "rawtypes"})
-    public <F> ResultIterator<F> interpret() throws SQL2StreamException {
+    public <F> ResultIterator<F> interpret() {
         if (parser == null) {
             return null;
         }
@@ -103,7 +108,7 @@ public final class SQL2Stream<T> {
     }
 
     @SuppressWarnings({"unchecked", "rawtypes"})
-    public <F> ResultIterator<F> interpret(Function<List<?>, ?> mappingFunction) throws SQL2StreamException {
+    public <F> ResultIterator<F> interpret(Function<List<?>, ?> mappingFunction) {
         if (parser == null) {
             return null;
         }

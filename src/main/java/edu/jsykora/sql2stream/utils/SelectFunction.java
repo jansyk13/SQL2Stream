@@ -1,4 +1,4 @@
-package edu.jsykora.sql2stream;
+package edu.jsykora.sql2stream.utils;
 
 import java.util.Iterator;
 import java.util.List;
@@ -14,13 +14,13 @@ import edu.jsykora.sql2stream.element.TerminalBaseElement;
 
 // TODO: Auto-generated Javadoc
 
-final class SelectFunction implements Function<BaseElement<?>, BaseElement<?>> {
+public final class SelectFunction implements Function<BaseElement<?>, BaseElement<?>> {
 
     private List<ColumnSelectFunction<?>> trueSelectFunctions;
 
     private Iterator<ReferenceObject<?>> iter;
 
-    protected SelectFunction(ResultColumnList list) {
+    public SelectFunction(ResultColumnList list) {
         if (list == null || list.get(0) == null || list.get(0).getName() == null) {
             return;
         }

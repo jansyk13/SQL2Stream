@@ -1,4 +1,4 @@
-package edu.jsykora.sql2stream;
+package edu.jsykora.sql2stream.utils;
 
 // TODO: Auto-generated Javadoc
 

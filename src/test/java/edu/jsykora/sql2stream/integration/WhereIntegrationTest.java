@@ -1,4 +1,4 @@
-package edu.jsykora.sql2stream;
+package edu.jsykora.sql2stream.integration;
 
 import static org.junit.Assert.fail;
 
@@ -8,9 +8,14 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.jsykora.sql2stream.InputContainer;
+import edu.jsykora.sql2stream.SQL2Stream;
+import edu.jsykora.sql2stream.SQL2StreamException;
 import edu.jsykora.sql2stream.element.BaseElement;
+import edu.jsykora.sql2stream.iterator.ResultIterator;
+import edu.jsykora.sql2stream.models.TestingModel;
 
-public class WhereTest {
+public class WhereIntegrationTest {
     private List<TestingModel> list1;
     private List<TestingModel> list2;
 
@@ -27,7 +32,6 @@ public class WhereTest {
         list2.add(new TestingModel("testing", 2));
         list2.add(new TestingModel("test", 1));
         list2.add(new TestingModel("test", 2));
-
     }
 
     @Test

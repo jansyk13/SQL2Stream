@@ -1,4 +1,4 @@
-package edu.jsykora.sql2stream;
+package edu.jsykora.sql2stream.sql;
 
 import com.foundationdb.sql.StandardException;
 import com.foundationdb.sql.parser.QueryTreeNode;
@@ -7,7 +7,7 @@ import com.foundationdb.sql.parser.Visitor;
 
 // TODO: Auto-generated Javadoc
 
-class DynamicVisitor implements Visitor {
+public class DynamicVisitor implements Visitor {
 
     protected QueryTreeNode node;
 

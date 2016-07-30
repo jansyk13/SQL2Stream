@@ -1,4 +1,4 @@
-package edu.jsykora.sql2stream;
+package edu.jsykora.sql2stream.models;
 
 import java.util.List;
 import java.util.function.Function;
@@ -6,7 +6,6 @@ import java.util.function.Function;
 public class ContainerTestModel<T> implements Function<List<TestingModel>, T> {
 
     public ContainerTestModel() {
-	// TODO Auto-generated constructor stub
     }
 
     @Override

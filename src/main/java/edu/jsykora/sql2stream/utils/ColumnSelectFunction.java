@@ -1,4 +1,4 @@
-package edu.jsykora.sql2stream;
+package edu.jsykora.sql2stream.utils;
 
 import java.lang.reflect.Field;
 import java.util.function.Function;
@@ -19,7 +19,6 @@ final class ColumnSelectFunction<R> implements Function<BaseElement<?>, Referenc
     protected ColumnSelectFunction(ResultColumn result) {
         this.alias = result.getTableName() != null ? result.getTableName() : result.getName();
         this.target = result.getName();
-
     }
 
     @SuppressWarnings("unchecked")
@@ -35,9 +34,8 @@ final class ColumnSelectFunction<R> implements Function<BaseElement<?>, Referenc
             Field targetField = local.getClazz().getDeclaredField(target);
             targetField.setAccessible(true);
             return new ReferenceObject<>((R) targetField.get(((BaseElement<?>) local).getE()), alias);
-        } catch (Exception e) {
+        } catch (IllegalAccessException | NoSuchFieldException e) {
             return null;
         }
-
     }
 }

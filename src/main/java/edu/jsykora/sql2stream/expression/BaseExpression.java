@@ -14,7 +14,7 @@ public abstract class BaseExpression<O extends Comparable<O>> implements Express
 
     protected O o;
 
-    public static <O extends Comparable<O>> BaseExpression<O> createBaseExpression(BaseElement<?> e, QueryTreeNode node) throws Exception {
+    public static <O extends Comparable<O>> BaseExpression<O> createBaseExpression(BaseElement<?> e, QueryTreeNode node) {
         if (node instanceof ColumnReference) {
             return new ReferenceExpression<>(e, (ColumnReference) node);
         }
