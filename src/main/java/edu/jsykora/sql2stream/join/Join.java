@@ -1,6 +1,8 @@
-package edu.jsykora.sql2stream;
+package edu.jsykora.sql2stream.join;
 
 import java.util.List;
+
+import edu.jsykora.sql2stream.element.BaseElement;
 
 // TODO: Auto-generated Javadoc
 

@@ -13,25 +13,25 @@ class DynamicVisitor implements Visitor {
 
     @Override
     public Visitable visit(Visitable node) throws StandardException {
-	if (this.node == null) {
-	    this.node = (QueryTreeNode) node;
-	}
-	return node;
+        if (this.node == null) {
+            this.node = (QueryTreeNode) node;
+        }
+        return node;
     }
 
     @Override
     public boolean visitChildrenFirst(Visitable node) {
-	return false;
+        return false;
     }
 
     @Override
     public boolean stopTraversal() {
-	return false;
+        return false;
     }
 
     @Override
     public boolean skipChildren(Visitable node) throws StandardException {
-	return false;
+        return false;
     }
 
 }

@@ -1,7 +1,7 @@
 /*
  * 
  */
-package edu.jsykora.sql2stream;
+package edu.jsykora.sql2stream.element;
 
 public interface Element<E> extends Cloneable {
 

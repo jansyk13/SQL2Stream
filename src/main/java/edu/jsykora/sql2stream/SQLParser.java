@@ -12,18 +12,18 @@ class SQLParser {
 
     private String sql;
 
-	SQLParser(String sql) {
-	this.parser = new com.foundationdb.sql.parser.SQLParser();
-	this.sql = sql;
+    SQLParser(String sql) {
+        this.parser = new com.foundationdb.sql.parser.SQLParser();
+        this.sql = sql;
     }
 
     protected QueryTreeNode parseSQL(DynamicVisitor visitor) throws SQL2StreamException {
-	try {
-		StatementNode stmt = parser.parseStatement(sql);
-	    stmt.accept(visitor);
-	    return visitor.node;
-	} catch (StandardException e) {
-	    throw new SQL2StreamException(e);
-	}
+        try {
+            StatementNode stmt = parser.parseStatement(sql);
+            stmt.accept(visitor);
+            return visitor.node;
+        } catch (StandardException e) {
+            throw new SQL2StreamException(e);
+        }
     }
 }

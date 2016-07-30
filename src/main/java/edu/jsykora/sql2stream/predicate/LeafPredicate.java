@@ -1,6 +1,12 @@
-package edu.jsykora.sql2stream;
+package edu.jsykora.sql2stream.predicate;
 
 import com.foundationdb.sql.parser.BinaryRelationalOperatorNode;
+
+import edu.jsykora.sql2stream.element.BaseElement;
+import edu.jsykora.sql2stream.element.Element;
+import edu.jsykora.sql2stream.expression.BaseExpression;
+import edu.jsykora.sql2stream.expression.Expression;
+import edu.jsykora.sql2stream.expression.ValueExpression;
 
 // TODO: Auto-generated Javadoc
 

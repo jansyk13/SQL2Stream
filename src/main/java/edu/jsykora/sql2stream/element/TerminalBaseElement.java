@@ -1,39 +1,39 @@
-package edu.jsykora.sql2stream;
+package edu.jsykora.sql2stream.element;
 
 // TODO: Auto-generated Javadoc
 
 public final class TerminalBaseElement<E> extends BaseElement<E> {
 
     private TerminalBaseElement(E e, String alias, Class<E> clazz) {
-	super(e, alias, clazz);
+        super(e, alias, clazz);
     }
 
     @SuppressWarnings("unchecked")
-    protected static <E> TerminalBaseElement<E> createTerminateBaseElement(E e, String alias) {
-	Class<E> klass = null;
-	if (e != null) {
-	    klass = (Class<E>) e.getClass();
-	}
+    public static <E> TerminalBaseElement<E> createTerminateBaseElement(E e, String alias) {
+        Class<E> klass = null;
+        if (e != null) {
+            klass = (Class<E>) e.getClass();
+        }
 
-	return new TerminalBaseElement<>(e, alias, klass);
+        return new TerminalBaseElement<>(e, alias, klass);
     }
 
     @Override
     public boolean hasNext() {
-	return false;
+        return false;
     }
 
     @Override
     public Element<?> visit(String alias) {
-	if (alias.equalsIgnoreCase(this.getAlias())) {
-	    return this;
-	}
-	return null;
+        if (alias.equalsIgnoreCase(this.getAlias())) {
+            return this;
+        }
+        return null;
     }
 
     @Override
     public Element<?> getLast() {
-	return this;
+        return this;
     }
 
     @Override
@@ -42,12 +42,12 @@ public final class TerminalBaseElement<E> extends BaseElement<E> {
 
     @Override
     public Element<?> getPenultimate() {
-	return null;
+        return null;
     }
 
     @Override
     public Element<E> clone() throws CloneNotSupportedException {
-	return TerminalBaseElement.createTerminateBaseElement(this.getE(), this.getAlias());
+        return TerminalBaseElement.createTerminateBaseElement(this.getE(), this.getAlias());
     }
 
 }

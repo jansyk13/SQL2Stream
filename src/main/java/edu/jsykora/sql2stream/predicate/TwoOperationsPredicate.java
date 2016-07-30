@@ -1,4 +1,4 @@
-package edu.jsykora.sql2stream;
+package edu.jsykora.sql2stream.predicate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ abstract class TwoOperationsPredicate<T> extends BasePredicate<T> {
     protected List<BasePredicate<T>> children;
 
     protected TwoOperationsPredicate() {
-	this.children = new ArrayList<>();
+        this.children = new ArrayList<>();
     }
 
 }

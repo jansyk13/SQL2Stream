@@ -8,24 +8,24 @@ public class InputContainer<T> {
     private Class<T> clazz;
 
     public InputContainer(Iterable<T> iterable, Class<T> clazz) {
-	this.clazz = clazz;
-	this.iterable = iterable;
+        this.clazz = clazz;
+        this.iterable = iterable;
     }
 
-    protected Iterable<T> getIterable() {
-	return iterable;
+    public Iterable<T> getIterable() {
+        return iterable;
     }
 
     protected void setStream(Iterable<T> iterable) {
-	this.iterable = iterable;
+        this.iterable = iterable;
     }
 
-    protected Class<T> getClazz() {
-	return clazz;
+    public Class<T> getClazz() {
+        return clazz;
     }
 
     protected void setClazz(Class<T> clazz) {
-	this.clazz = clazz;
+        this.clazz = clazz;
     }
 
 }

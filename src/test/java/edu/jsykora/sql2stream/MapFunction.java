@@ -7,12 +7,12 @@ public class MapFunction {
 
     public class MappingFunction implements Function<List<Object>, TestingModel> {
 
-	@Override
-	public TestingModel apply(List<Object> t) {
-	    TestingModel local = new TestingModel();
-	    local.setName((String) t.get(0));
-	    return local;
-	}
+        @Override
+        public TestingModel apply(List<Object> t) {
+            TestingModel local = new TestingModel();
+            local.setName((String) t.get(0));
+            return local;
+        }
 
     }
 

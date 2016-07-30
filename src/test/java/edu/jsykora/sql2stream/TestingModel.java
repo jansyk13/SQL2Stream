@@ -9,28 +9,28 @@ public class TestingModel {
     }
 
     public TestingModel(String name, int number) {
-	this.name = name;
-	this.number = number;
+        this.name = name;
+        this.number = number;
     }
 
     public String getName() {
-	return name;
+        return name;
     }
 
     public void setName(String name) {
-	this.name = name;
+        this.name = name;
     }
 
     public int getNumber() {
-	return number;
+        return number;
     }
 
     public void setNumber(int number) {
-	this.number = number;
+        this.number = number;
     }
 
     @Override
     public String toString() {
-	return this.name + "-" + this.number;
+        return this.name + "-" + this.number;
     }
 }

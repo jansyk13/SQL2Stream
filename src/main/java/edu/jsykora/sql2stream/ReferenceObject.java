@@ -9,15 +9,15 @@ class ReferenceObject<R> {
     private String alias;
 
     protected ReferenceObject(R r, String alias) {
-	this.r = r;
-	this.alias = alias;
+        this.r = r;
+        this.alias = alias;
     }
 
     public R getR() {
-	return r;
+        return r;
     }
 
     public String getAlias() {
-	return alias;
+        return alias;
     }
 }

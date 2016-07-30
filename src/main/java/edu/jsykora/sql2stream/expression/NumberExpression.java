@@ -1,4 +1,4 @@
-package edu.jsykora.sql2stream;
+package edu.jsykora.sql2stream.expression;
 
 import com.foundationdb.sql.parser.NumericConstantNode;
 
@@ -10,12 +10,12 @@ final class NumberExpression<O extends Number & Comparable<O>> extends ValueExpr
 
     @SuppressWarnings("unchecked")
     protected NumberExpression(NumericConstantNode node) {
-	this.o = (O) node.getValue();
+        this.o = (O) node.getValue();
     }
 
     @Override
     public O returnExpression() {
-	return o;
+        return o;
     }
 
 }
