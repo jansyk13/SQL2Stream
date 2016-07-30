@@ -1,4 +1,4 @@
-# SQL2Stream
+# SQL2Stream [![Build Status](https://travis-ci.org/jansyk13/SQL2Stream.svg?branch=master)](https://travis-ci.org/jansyk13/SQL2Stream)
 
 Bachelor thesis at University of Economics in Prague led by Ing. Rudolf Pecinovský, CSc (Opponent: Ing. Vladimír Oraný). Thesis has been succesfully defended in 2015. Full text in Czech can be found as pdf file in repository.
 
