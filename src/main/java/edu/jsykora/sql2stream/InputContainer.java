@@ -1,31 +1,32 @@
 package edu.jsykora.sql2stream;
 
 
+import java.util.stream.Stream;
+
 public class InputContainer<T> {
 
-    private Iterable<T> iterable;
+    private Stream<T> stream;
 
     private Class<T> clazz;
 
-    public InputContainer(Iterable<T> iterable, Class<T> clazz) {
+    public InputContainer(Stream<T> stream, Class<T> clazz) {
         this.clazz = clazz;
-        this.iterable = iterable;
+        this.stream = stream;
     }
 
-    public Iterable<T> getIterable() {
-        return iterable;
+    public Stream<T> getStream() {
+        return stream;
     }
 
-    protected void setStream(Iterable<T> iterable) {
-        this.iterable = iterable;
+    public void setStream(Stream<T> stream) {
+        this.stream = stream;
     }
 
     public Class<T> getClazz() {
         return clazz;
     }
 
-    protected void setClazz(Class<T> clazz) {
+    public void setClazz(Class<T> clazz) {
         this.clazz = clazz;
     }
-
 }

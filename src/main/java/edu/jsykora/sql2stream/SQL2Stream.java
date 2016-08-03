@@ -1,10 +1,12 @@
 package edu.jsykora.sql2stream;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.foundationdb.sql.parser.CursorNode;
 import com.foundationdb.sql.parser.FromList;
@@ -14,9 +16,7 @@ import com.foundationdb.sql.parser.SelectNode;
 import com.foundationdb.sql.parser.ValueNode;
 
 import edu.jsykora.sql2stream.element.BaseElement;
-import edu.jsykora.sql2stream.element.CompositeSourceElement;
 import edu.jsykora.sql2stream.element.SourceElement;
-import edu.jsykora.sql2stream.element.TerminalSourceElement;
 import edu.jsykora.sql2stream.iterator.BaseResultIterator;
 import edu.jsykora.sql2stream.iterator.MappedResultIterator;
 import edu.jsykora.sql2stream.iterator.ResultIterator;
@@ -29,68 +29,38 @@ import edu.jsykora.sql2stream.utils.SelectFunction;
 
 // TODO: Auto-generated Javadoc
 
-public final class SQL2Stream<T> {
-
-    private SourceElement<T> source;
-
-    private CursorNode sqlTree;
-
-    private SQLParser parser;
-
-    private DynamicVisitor visitor;
-
-    private FromList fromList;
-
-    private ResultColumnList resultList;
-
-    private OrderByList orderList;
-
-    private ValueNode whereClause;
-
-    private SQL2Stream(String sql) {
+public final class SQL2Stream {
 
 
-        if (sql != null && !sql.isEmpty()) {
-            this.parser = new SQLParser(sql);
-            this.visitor = new DynamicVisitor();
+    private final List<InputContainer<?>> inputContainerList;
+
+    private SQL2StreamEngine engine;
+
+    public SQL2Stream(String sql) {
+        this.engine = new SQL2StreamEngine(sql);
+        this.inputContainerList = new ArrayList<>();
+    }
+
+    public <T> SQL2Stream addSource(Stream<T> inputStream, Class<T> clazz) {
+        InputContainer<T> inputContainer = new InputContainer<>(inputStream, clazz);
+        if (inputContainerList.contains(inputContainer)) {
+            throw new IllegalStateException("Cannot enter two same input containers.");
         }
+        this.inputContainerList.add(inputContainer);
+        return this;
     }
 
-    public SQL2Stream(String sql, InputContainer<T> t) {
-        this(sql);
-        this.source = TerminalSourceElement.createTerminalSourceElement(t, "t");
-
+    public <F> Stream<F> compute(Function<Stream<?>, F> mappingFunction) {
+        Stream<Stream<?>> computedResult = this.compute();
+        return computedResult.map(innerStream -> mappingFunction.apply(innerStream));
     }
 
-    public <U> SQL2Stream(String sql, InputContainer<T> t, InputContainer<U> u) {
-        this(sql);
-        this.source = CompositeSourceElement.createCompositeSourceElement(t, "t", TerminalSourceElement.createTerminalSourceElement(u, "u"));
+    public Stream<Stream<?>> compute() {
+        Stream<Stream<?>> computedResult = this.engine.compute();
+        return computedResult;
     }
 
-    public <U, R> SQL2Stream(String sql, InputContainer<T> t, InputContainer<U> u, InputContainer<R> r) {
-        this(sql);
-        this.source = CompositeSourceElement.createCompositeSourceElement(t, "t",
-                CompositeSourceElement.createCompositeSourceElement(u, "u", TerminalSourceElement.createTerminalSourceElement(r, "r")));
-    }
 
-    public <U, R, V> SQL2Stream(String sql, InputContainer<T> t, InputContainer<U> u, InputContainer<R> r, InputContainer<V> v) {
-        this(sql);
-        this.source = CompositeSourceElement.createCompositeSourceElement(
-                t,
-                "t",
-                CompositeSourceElement.createCompositeSourceElement(u, "u",
-                        CompositeSourceElement.createCompositeSourceElement(r, "r", TerminalSourceElement.createTerminalSourceElement(v, "v"))));
-    }
-
-    protected void parse() {
-        this.sqlTree = (CursorNode) parser.parseSQL(visitor);
-
-        SelectNode selectNode = (SelectNode) sqlTree.getResultSetNode();
-        this.fromList = selectNode.getFromList();
-        this.resultList = selectNode.getResultColumns();
-        this.orderList = sqlTree.getOrderByList();
-        this.whereClause = selectNode.getWhereClause();
-    }
 
     @SuppressWarnings({"unchecked", "rawtypes"})
     public <F> ResultIterator<F> interpret() {
@@ -107,8 +77,8 @@ public final class SQL2Stream<T> {
         return new BaseResultIterator(localResult);
     }
 
-    @SuppressWarnings({"unchecked", "rawtypes"})
-    public <F> ResultIterator<F> interpret(Function<List<?>, ?> mappingFunction) {
+    @SuppressWarnings({"unchecked"})
+    public <F> ResultIterator<F> interpret(Function<List<?>, F> mappingFunction) {
         if (parser == null) {
             return null;
         }
