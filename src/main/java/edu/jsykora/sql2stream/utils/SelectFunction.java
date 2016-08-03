@@ -1,9 +1,11 @@
 package edu.jsykora.sql2stream.utils;
 
+import static java.util.stream.Collectors.toList;
+
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import com.foundationdb.sql.parser.ResultColumnList;
@@ -16,25 +18,25 @@ import edu.jsykora.sql2stream.element.TerminalBaseElement;
 
 public final class SelectFunction implements Function<BaseElement<?>, BaseElement<?>> {
 
-    private List<ColumnSelectFunction<?>> trueSelectFunctions;
+    private final List<ColumnSelectFunction<?>> trueSelectFunctions;
 
     private Iterator<ReferenceObject<?>> iter;
 
     public SelectFunction(ResultColumnList list) {
         if (list == null || list.get(0) == null || list.get(0).getName() == null) {
-            return;
+            this.trueSelectFunctions = Collections.emptyList();
+        } else {
+            this.trueSelectFunctions = StreamSupport.stream(list.spliterator(), false).map(ColumnSelectFunction::new).collect(toList());
         }
-
-        this.trueSelectFunctions = StreamSupport.stream(list.spliterator(), false).map(ColumnSelectFunction::new).collect(Collectors.toList());
     }
 
     @Override
     public BaseElement<?> apply(BaseElement<?> t) {
-        if (trueSelectFunctions == null || trueSelectFunctions.isEmpty()) {
+        if (trueSelectFunctions.isEmpty()) {
             return t;
         }
 
-        List<ReferenceObject<?>> localResult = trueSelectFunctions.stream().map(f -> f.apply(t)).collect(Collectors.toList());
+        List<ReferenceObject<?>> localResult = trueSelectFunctions.stream().map(f -> f.apply(t)).collect(toList());
         iter = localResult.iterator();
 
         return recursiveCreation();
